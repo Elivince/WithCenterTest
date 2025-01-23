@@ -1,11 +1,11 @@
 <script lang="ts">
     import { onMount } from "svelte";
 
-    let rates: Record<string, number> = {};
-    let fromCurrency = "PHP";
-    let toCurrency = "USD";
-    let amount = 50;
-    let total = "";
+    let rates: Record<string, number> = $state({});
+    let fromCurrency = $state("PHP");
+    let toCurrency = $state("USD");
+    let amount = $state(50);
+    let total = $state("");
 
     onMount(async () => {
         try {
@@ -19,12 +19,16 @@
         }
     });
 
-    $: if (rates[fromCurrency] && rates[toCurrency]) {
+    $effect(() => {
+        if (rates[fromCurrency] && rates[toCurrency]) {
         const fromRate = rates[fromCurrency];
         const toRate = rates[toCurrency];
         total = ((amount * toRate) / fromRate).toFixed(2);
-    }
+        }
+    });
 </script>
+
+
 
 <style>
     h1 {

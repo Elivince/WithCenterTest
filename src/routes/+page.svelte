@@ -10,7 +10,7 @@
     onMount(async () => {
         try {
             const response = await fetch(
-                `https://api.freecurrencyapi.com/v1/latest?apikey=${import.meta.env.VITE_API_KEY}`
+                `https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_2KJqrpWeUBBD3abxKDA32wP9qsbHX9Ojciz05mob`
             );
             const data = await response.json();
             rates = data.data;
